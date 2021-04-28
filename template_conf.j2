@@ -1,0 +1,22 @@
+{% for GOICUOC in int %}
+edit groups FW-BNG firewall family inet filter {{GOICUOC}}-Out
+set term speedtest from source-prefix-list SPEEDTEST-IPv4 
+set term speedtest then accept
+insert term speedtest before term final
+top 
+edit groups FW-BNG firewall family inet filter {{GOICUOC}}-In
+set term speedtest from destination-prefix-list SPEEDTEST-IPv4 
+set term speedtest then accept 
+insert term speedtest before term final
+top
+edit groups FW-BNG firewall family inet6 filter {{GOICUOC}}-Out-V6
+set term speedtest from source-prefix-list SPEEDTEST-IPv6 
+set term speedtest then accept
+insert term speedtest before term final
+top 
+edit groups FW-BNG firewall family inet6 filter {{GOICUOC}}-In-V6
+set term speedtest from destination-prefix-list SPEEDTEST-IPv6 
+set term speedtest then accept 
+insert term speedtest before term final
+top
+{% endfor %}
